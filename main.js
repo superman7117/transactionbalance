@@ -6,7 +6,7 @@ $(document).ready(function() {
   $('#all').on('change',  onlyAll);
   $('#wit').on('change',  onlyWithdrawls);
   $('#dep').on('change',  onlyDeposits);
-  $('table').on('click', '.trash', takeOff)
+  $('table').on('click', '.trash', takeOff);
 
   var counterArray = [];
 
@@ -26,8 +26,8 @@ $(document).ready(function() {
     return fiver;
   }
 
-  function makeDeposit(){
-    e.preventDefault;
+  function makeDeposit(e){
+    e.preventDefault();
     var theComment = $('#comment').val();
     var theAmount = ($('#amount').val()*1).toFixed(2);
     if (!theComment.length || theAmount == 0){
@@ -45,7 +45,8 @@ $(document).ready(function() {
     $('#theForm')[0].reset();
   }
 
-  function makeWithdrawl(){
+  function makeWithdrawl(e){
+    e.preventDefault();
     var theComment = $('#comment').val();
     var theAmount = ($('#amount').val()*-1).toFixed(2);
     counterArray.push(parseFloat(theAmount)*-1)
