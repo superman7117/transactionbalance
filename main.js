@@ -27,12 +27,12 @@ $(document).ready(function() {
   }
 
   function makeDeposit(e){
-    e.preventDefault();
     var theComment = $('#comment').val();
     var theAmount = ($('#amount').val()*1).toFixed(2);
     if (!theComment.length || theAmount == 0){
       return;
     }
+    e.preventDefault();
     counterArray.push(parseFloat(theAmount));
     mather();
     var $myRows = $('.bottom').clone().removeClass('bottom').addClass('newRowD');
