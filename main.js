@@ -11,18 +11,13 @@ $(document).ready(function() {
 
   var counterArray = [];
 
-function mather(){
-
-}
   function makeDeposit(){
     var theComment = $('#comment').val();
     var theAmount = ($('#amount').val()*1).toFixed(2);
-    console.log(theComment, theAmount);
     if (!theComment.length || theAmount == 0){
       return;
     }
     counterArray.push(parseFloat(theAmount))
-    var $myRows = $('.bottom').clone().removeClass('bottom').addClass('newRowD');
     var fiver = counterArray.reduce(function(acc, e){
       return acc = e + acc;
     })
@@ -34,9 +29,10 @@ function mather(){
     }
     fiver = commaSeparateNumber(fiver);
 
+    var $myRows = $('.bottom').clone().removeClass('bottom').addClass('newRowD');
     $('table').append($myRows);
     $('.newRowD > .one').append(theComment).removeClass('one');
-    $('.newRowD > .two').append(moment().format('l')).removeClass('two');
+    $('.newRowD > .two').append(moment().format('llll')).removeClass('two');
     $('.newRowD > .three').append("$"+theAmount).removeClass('three');
     $('.newRowD > .four').append("-").removeClass('four');
     $('.newRowD > .five').append("$"+fiver).removeClass('five');
@@ -52,13 +48,21 @@ function mather(){
     if (!theComment.length || theAmount == 0){
       return;
     }
-    var $myRows = $('.bottom').clone().removeClass('bottom').addClass('newRowW');
     var fiver = counterArray.reduce(function(acc, e){
       return acc = e + acc;
     })
+    function commaSeparateNumber(val){
+      while (/(\d+)(\d{3})/.test(val.toString())){
+        val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+      }
+      return val;
+    }
+    fiver = commaSeparateNumber(fiver);
+
+    var $myRows = $('.bottom').clone().removeClass('bottom').addClass('newRowW');
     $('table').append($myRows);
     $('.newRowW > .one').append(theComment).removeClass('one');
-    $('.newRowW > .two').append(moment().format('l')).removeClass('two');
+    $('.newRowW > .two').append(moment().format('llll')).removeClass('two');
     $('.newRowW > .three').append("-").removeClass('three');
     $('.newRowW > .four').append("$"+theAmount*-1).removeClass('four');
     $('.newRowW > .five').append("$"+fiver).removeClass('five');
@@ -79,8 +83,29 @@ function mather(){
     $('.newRowW').show();
     $('.newRowD').hide();
   }
-})
 
   function takeOff(){
+    var deleteD = $(this).parent().parent('.newRowD').children('.depo').text();
+    var deD = Number(deleteD.slice(1))*-1
+    var deleteW = $(this).parent().parent('.newRowW').children('.with').text();
+    var deW = Number(deleteW.slice(1))
+    counterArray.push(parseFloat(deW));
+    counterArray.push(deD);
+    var fiver = counterArray.reduce(function(acc, e){
+      return acc = e + acc;
+    })
+    function commaSeparateNumber(val){
+      while (/(\d+)(\d{3})/.test(val.toString())){
+        val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+      }
+      return val;
+    }
+    fiver = commaSeparateNumber(fiver);
+
+    $('#balance').children().remove();
+    $('#balance').append('<span>$'+fiver+'</span>')
     $(this).parent().parent().remove();
+
   }
+
+})
