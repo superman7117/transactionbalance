@@ -46,13 +46,13 @@ $(document).ready(function() {
   }
 
   function makeWithdrawl(e){
-    e.preventDefault();
     var theComment = $('#comment').val();
-    var theAmount = ($('#amount').val()*-1).toFixed(2);
-    counterArray.push(parseFloat(theAmount)*-1)
+    var theAmount = ($('#amount').val()*1).toFixed(2);
     if (!theComment.length || theAmount == 0){
       return;
     }
+    e.preventDefault();
+    counterArray.push(parseFloat(theAmount)*-1)
     mather();
 
     var $myRows = $('.bottom').clone().removeClass('bottom').addClass('newRowW');
@@ -64,6 +64,13 @@ $(document).ready(function() {
     $('.newRowW > .four').append("$"+theAmount*-1).removeClass('four');
     $('.newRowW > .five').append("$"+mather()).removeClass('five');
     $('#theForm')[0].reset();
+  }
+
+  function onlyAll(){
+    $('.newRowD').show();
+    $('.newRowW').show();
+    $('.showVDT').remove();
+    $('.showVWT').remove();
   }
 
   function onlyDeposits(){
@@ -78,22 +85,16 @@ $(document).ready(function() {
     $('.showVWT').remove();
   }
 
-  function onlyAll(){
-    $('.newRowD').show();
-    $('.newRowW').show();
-    $('.showVDT').remove();
-    $('.showVWT').remove();
-  }
-
   function onlyWithdrawls(){
     $('.newRowW').show();
     $('.newRowD').hide();
     $('.showVDT').remove();
     var sum = 0;
-    $('.newRowW').children('.depo').text().split('$').forEach(function(e){
+    $('.newRowW').children('.with').text().split('$').forEach(function(e){
       sum +=  Number(e);
-      return sum;
+      console.log('sum', sum);
     });
+    console.log(sum);
     $('table').append('<div class="showVWT">Withdrawl Total $'+sum+'</div>');
   }
 
