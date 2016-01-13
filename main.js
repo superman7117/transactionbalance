@@ -100,9 +100,9 @@ $(document).ready(function() {
 
   function takeOff(){
     var deleteD = $(this).parent().parent('.newRowD').children('.depo').text();
-    var deD = Number(deleteD.slice(1))*-1
+    var deD = Number(deleteD.slice(1))*-1;
     var deleteW = $(this).parent().parent('.newRowW').children('.with').text();
-    var deW = Number(deleteW.slice(1))
+    var deW = Number(deleteW.slice(1))*-1;
     counterArray.push(parseFloat(deW));
     counterArray.push(deD);
     mather();
