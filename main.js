@@ -67,18 +67,34 @@ $(document).ready(function() {
   function onlyDeposits(){
     $('.newRowD').show();
     $('.newRowW').hide();
-    console.log($('.newRowD').children('.depo').text());
+    var sum = 0;
+    $('.newRowD').children('.depo').text().split('$').forEach(function(e){
+       sum +=  Number(e);
+       return sum;
+    });
+    $('table').append('<div class="showVDT">Deposit Total $'+sum+'</div>');
+    $('.showVWT').remove();
 
   }
 
   function onlyAll(){
     $('.newRowD').show();
     $('.newRowW').show();
+    $('.showVDT').remove();
+    $('.showVWT').remove();
   }
 
   function onlyWithdrawls(){
     $('.newRowW').show();
     $('.newRowD').hide();
+    $('.showVDT').remove();
+    var sum = 0;
+    $('.newRowW').children('.depo').text().split('$').forEach(function(e){
+       sum +=  Number(e);
+       return sum;
+    });
+    $('table').append('<div class="showVWT">Withdrawl Total $'+sum+'</div>');
+
   }
 
   function takeOff(){
