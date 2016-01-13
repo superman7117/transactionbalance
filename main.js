@@ -27,6 +27,7 @@ $(document).ready(function() {
   }
 
   function makeDeposit(){
+    e.preventDefault;
     var theComment = $('#comment').val();
     var theAmount = ($('#amount').val()*1).toFixed(2);
     if (!theComment.length || theAmount == 0){
@@ -69,12 +70,11 @@ $(document).ready(function() {
     $('.newRowW').hide();
     var sum = 0;
     $('.newRowD').children('.depo').text().split('$').forEach(function(e){
-       sum +=  Number(e);
-       return sum;
+      sum +=  Number(e);
+      return sum;
     });
     $('table').append('<div class="showVDT">Deposit Total $'+sum+'</div>');
     $('.showVWT').remove();
-
   }
 
   function onlyAll(){
@@ -90,11 +90,10 @@ $(document).ready(function() {
     $('.showVDT').remove();
     var sum = 0;
     $('.newRowW').children('.depo').text().split('$').forEach(function(e){
-       sum +=  Number(e);
-       return sum;
+      sum +=  Number(e);
+      return sum;
     });
     $('table').append('<div class="showVWT">Withdrawl Total $'+sum+'</div>');
-
   }
 
   function takeOff(){
