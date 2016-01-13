@@ -9,4 +9,3 @@ MVP:
     1. Running
       2. Total
 3. Filtering
-4. Sort

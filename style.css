@@ -25,6 +25,7 @@ td {
 #balance {
   height: 10vw;
   background-color: limegreen;
+  font-size: 5em;
 }
 .bottom{
   display:none;
